@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search My Site</title>
+    <script>
+        //Search specific site rather than the whole web
+        function search() {
+            var site = "wikipedia.org";
+            //get the text the user entered
+            var lookfor = document.getElementById("txtlookfor").value;
+            //search if box not empty
+            if (lookfor.length > 0) {
+                var query = "http://www.google.com/search?q=" + encodeURIComponent(lookfor) + " site:" + site;
+                //set address bar equal to query
+                location.href = query;
+            } else {
+                alert("Please type the word or phrase that you would like to search for.");
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <p>Search this site:
+        <input type="text" id="txtlookfor" autofocus>
+        <input type="button" onclick="search()" value="Go">
+    </p>
+</body>
+
+</html>
