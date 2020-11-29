@@ -4,17 +4,33 @@
 <head>
     <title>Search My Site</title>
     <script>
-        //Search specific site rather than the whole web
+        //Search a specific site rather than the entire Web.
         function search() {
+            //Replace sample domain name below with your own domain name. 
             var site = "wikipedia.org";
-            //get the text the user entered
+            //Get the text that the user typed into the textbox.
             var lookfor = document.getElementById("txtlookfor").value;
-            //search if box not empty
+            //If the box wasn't empty do the search. Then press ENTER. 
             if (lookfor.length > 0) {
-                var query = "http://www.google.com/search?q=" + encodeURIComponent(lookfor) + " site:" + site;
-                //set address bar equal to query
+                //Look at the drop-down value and make search URL accordingly. 
+                var ddchoice = document.getElementById("dropdown").value
+
+
+                //Build URL for the search. 
+                if (ddchoice == 1) {
+                    var searchEngine = "http://www.bing.com/search?q=";
+                } else if (ddchoice == 2) {
+                    var searchEngine = "http://www.google.com/search?q=";
+                } else if (ddchoice == 3) {
+                    var searchEngine = "http://www.yahoo.com/search?q=";
+                }
+                var query = searchEngine + encodeURIComponent(lookfor) + " site:" + site;
+                console.log("engine=" + searchEngine, "query=" + query);
+
+                //Set Address bar equal to query.
                 location.href = query;
             } else {
+                //If textbox was empty, show an alert.
                 alert("Please type the word or phrase that you would like to search for.");
             }
 
@@ -25,6 +41,13 @@
 <body>
     <p>Search this site:
         <input type="text" id="txtlookfor" autofocus>
+        <!-- Show drop-down list -->
+        &nbsp;Choose engine:
+        <select id="dropdown">
+		<option value="1">Bing</option> 
+		<option value="2">Google</option>
+		<option value="3" selected>Yahoo</option>
+		</select>
         <input type="button" onclick="search()" value="Go">
     </p>
 </body>
